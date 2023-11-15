@@ -1,0 +1,22 @@
+package com.fedatarios.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "observaciones")
+public class Observaciones {
+
+	private Long idobservaciones;
+	
+	private String descripcion;
+	
+	@ManyToOne
+	@JoinColumn(name = "iddoc_escaneado")
+	Documentos_Escaneados docEscaneados;
+	
+	
+	
+}

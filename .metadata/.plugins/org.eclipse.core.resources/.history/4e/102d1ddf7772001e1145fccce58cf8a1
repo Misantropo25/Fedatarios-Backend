@@ -1,0 +1,13 @@
+package com.fedatarios.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tipo_documentos")
+
+public class TipoDocumento {
+	
+	private 
+
+}

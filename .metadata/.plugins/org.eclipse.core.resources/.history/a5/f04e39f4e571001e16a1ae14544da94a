@@ -1,0 +1,23 @@
+package com.fedatarios.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fedatarios.service.RolServicio;
+
+@RestController
+public class rolControlador {
+
+	/* aqui inyectamos el servicio */
+	@Autowired
+	private RolServicio servicio;
+	
+	@GetMapping("/roles")
+	public List<RolServicio> listarRoles(){
+		return servicio.listarRoles();
+	}
+	
+}

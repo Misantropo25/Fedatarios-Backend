@@ -1,0 +1,20 @@
+package com.fedatarios.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fedatarios.model.Horarios;
+import com.fedatarios.repository.HorarioRepositorio;
+
+@Service
+public class HorarioService {
+
+	@Autowired
+	private HorarioRepositorio horario;
+	
+	public List<Horarios> listarHorarios(){
+		return horario.findAll();
+	}
+}

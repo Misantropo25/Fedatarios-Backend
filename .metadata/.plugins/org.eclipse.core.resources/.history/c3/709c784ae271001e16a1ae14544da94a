@@ -1,0 +1,20 @@
+package com.fedatarios.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fedatarios.repository.RolRepository;
+
+@Service
+public class RolServicio {
+	
+	//inyectando el servicio 
+	@Autowired
+	private RolRepositorio repositorio;
+	
+	public List<rol> rol(){
+		return repositorio;
+	}
+	
+
+}

@@ -1,0 +1,9 @@
+package com.fedatarios.model;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ObservacionesRepositorio extends JpaRepository<Observaciones, Long> {
+
+}

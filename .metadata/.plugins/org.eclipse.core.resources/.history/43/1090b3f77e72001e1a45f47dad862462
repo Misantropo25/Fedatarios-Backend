@@ -1,0 +1,67 @@
+package com.fedatarios.model;
+
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="legajos")
+
+public class Legajo {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idlegajo;
+	
+	private Date fecha;
+	
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private Usuarios usuario;
+	
+	@OneToMany(mappedBy = "legajo")
+
+	public Long getIdlegajo() {
+		return idlegajo;
+	}
+
+	public void setIdlegajo(Long idlegajo) {
+		this.idlegajo = idlegajo;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Usuarios getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
+	}
+
+	public Legajo(Long idlegajo, Date fecha, Usuarios usuario) {
+		super();
+		this.idlegajo = idlegajo;
+		this.fecha = fecha;
+		this.usuario = usuario;
+	}
+
+	public Legajo() {
+		super();
+	}
+	
+	
+}

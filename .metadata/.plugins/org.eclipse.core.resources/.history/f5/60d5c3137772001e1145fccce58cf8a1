@@ -1,0 +1,18 @@
+package com.fedatarios.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "usuario_declaracione_juradas")
+public class UsuarioDeclaracionesJuradas {
+
+	private Long idusuriodj;
+	
+	@ManyToOne
+	@JoinColumn(name = "idusuario")
+	private Usuarios usuario;
+	
+}

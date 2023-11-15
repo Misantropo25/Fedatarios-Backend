@@ -1,0 +1,60 @@
+package com.fedatarios.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="tipo_documentos")
+
+public class TipoDocumento {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long iddocumento;
+	
+	private String descripcion;
+	
+	@OneToOne(mappedBy = "tipo_documento")
+	private Documentos_Escaneados doc_escaneados;
+
+	public Long getIddocumento() {
+		return iddocumento;
+	}
+
+	public void setIddocumento(Long iddocumento) {
+		this.iddocumento = iddocumento;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public Documentos_Escaneados getDocumento_escaneado() {
+		return documento_escaneado;
+	}
+
+	public void setDocumento_escaneado(Documentos_Escaneados documento_escaneado) {
+		this.documento_escaneado = documento_escaneado;
+	}
+
+	public TipoDocumento(Long iddocumento, String descripcion, Documentos_Escaneados documento_escaneado) {
+		super();
+		this.iddocumento = iddocumento;
+		this.descripcion = descripcion;
+		this.documento_escaneado = documento_escaneado;
+	}
+
+	public TipoDocumento() {
+		super();
+	}
+	
+
+}

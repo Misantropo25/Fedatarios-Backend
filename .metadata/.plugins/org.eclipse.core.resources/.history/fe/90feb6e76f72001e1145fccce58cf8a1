@@ -1,0 +1,9 @@
+package com.fedatarios.model;
+
+@Entity
+public class Horarios {
+
+    private Long id;
+    private Time fecha;
+
+}

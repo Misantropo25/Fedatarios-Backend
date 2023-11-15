@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.fedatarios.model.Legajo"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.DeclaracionesJuradas"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.UsuarioDeclaracionesJuradas"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.TipoDocumento"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.Documentos_Escaneados"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.Observaciones"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.fedatarios.repository.HorarioRepositorio"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.fedatarios.model.Horarios"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+</qualifiedTypeNameHistroy>

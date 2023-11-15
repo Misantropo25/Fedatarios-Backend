@@ -1,0 +1,36 @@
+package com.fedatarios.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fedatarios.model.Rol;
+import com.fedatarios.service.RolServicio;
+
+@RestController
+public class rolControlador {
+
+	/* aqui inyectamos el servicio */
+	@Autowired
+	private RolServicio servicio;
+	
+	@GetMapping("/roles")
+	public List<Rol> listarRoles(){
+		return servicio.listarRoles();
+	}
+	
+	@GetMapping("/roles/{id}")
+	public List<Rol> ObtenerRoles(@PathVariable Long id){
+		return servicio.obtenerRol(id);
+	}
+	
+	@PostMapping("guardar_rol")
+	public void guardarRol(@RequestBody Rol rol) {
+		servicio.guardarRol(rol);
+	}
+}
