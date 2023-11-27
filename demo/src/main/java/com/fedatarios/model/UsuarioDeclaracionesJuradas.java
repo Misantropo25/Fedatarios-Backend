@@ -1,5 +1,6 @@
 package com.fedatarios.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class UsuarioDeclaracionesJuradas {
 	
 	@ManyToOne
 	@JoinColumn(name = "iddeclaracion")
+	@JsonBackReference
 	DeclaracionesJuradas dj;
 
 	public Long getIdusuriodj() {

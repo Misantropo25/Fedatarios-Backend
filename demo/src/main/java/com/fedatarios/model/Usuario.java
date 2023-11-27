@@ -3,7 +3,9 @@ package com.fedatarios.model;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.lang.Nullable;
 
@@ -13,7 +15,7 @@ public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idusuario;
+	private Long idUsuario;
 
 	@Column(name = "dni", length = 15)
 	private String dni;
@@ -36,49 +38,105 @@ public class Usuario {
 	@Column(name = "password", length = 100)
 	private String password;
 
-	@Column(name = "username", length = 100)
-	private String user;
+	@Column(name = "foto", length = 12000)
+	private String foto;
 
-	@OneToOne
-	@Nullable
+	@ManyToOne
 	@JoinColumn(name = "idrol")
-	private Rol idrol;
+	@JsonBackReference
+	private Rol rol;
 
 	@Column(name = "fechaInicio")
 	@Temporal(TemporalType.TIMESTAMP) // o TemporalType.DATE según lo que necesites
 	private Date fechaInicio;
 
 	@OneToMany(mappedBy = "usuario")
-	List<Horarios> horariosList;
-	
-	@OneToMany(mappedBy = "usuario")
+	@JsonManagedReference
 	List<Legajo> legajoList;
-	
+
 	@OneToMany(mappedBy = "usuario")
 	List<UsuarioDeclaracionesJuradas> usuariodj;
 
-	public String getUser() {
-		return user;
-	}
+	@OneToMany(mappedBy = "usuario")
+	private List<ReservaHorario> reservasHorario;
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+	@OneToMany(mappedBy = "usuario")
+	@JsonManagedReference
+	private List<HorarioFedatario> horariosFedatario;
 
-	public String getPassword() {
-		return password;
-	}
+	//constructores
 
-	public void setPassword(String password) {
+
+	public Usuario(Long idUsuario, String dni, String apePaterno, String apeMaterno, String nombre, String email, String telefono, String password, String foto, Rol rol, Date fechaInicio, List<Legajo> legajoList, List<UsuarioDeclaracionesJuradas> usuariodj, List<ReservaHorario> reservasHorario, List<HorarioFedatario> horariosFedatario) {
+		this.idUsuario = idUsuario;
+		this.dni = dni;
+		this.apePaterno = apePaterno;
+		this.apeMaterno = apeMaterno;
+		this.nombre = nombre;
+		this.email = email;
+		this.telefono = telefono;
 		this.password = password;
+		this.foto = foto;
+		this.rol = rol;
+		this.fechaInicio = fechaInicio;
+		this.legajoList = legajoList;
+		this.usuariodj = usuariodj;
+		this.reservasHorario = reservasHorario;
+		this.horariosFedatario = horariosFedatario;
+	}
+
+	public Usuario() {
+		super();
+	}
+
+	// getters y setters
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public List<HorarioFedatario> getHorariosFedatario() {
+		return horariosFedatario;
+	}
+
+	public void setHorariosFedatario(List<HorarioFedatario> horariosFedatario) {
+		this.horariosFedatario = horariosFedatario;
+	}
+
+	public List<ReservaHorario> getReservasHorario() {
+		return reservasHorario;
+	}
+
+	public void setReservasHorario(List<ReservaHorario> reservasHorario) {
+		this.reservasHorario = reservasHorario;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public Long getIdusuario() {
-		return idusuario;
+		return idUsuario;
 	}
 
-	public void setIdusuario(Long idusuario) {
-		this.idusuario = idusuario;
+	public void setIdusuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getDni() {
@@ -93,16 +151,16 @@ public class Usuario {
 		return apePaterno;
 	}
 
-	public void setApePaterno(String ape_paterno) {
-		this.apePaterno = ape_paterno;
+	public void setApePaterno(String apePaterno) {
+		this.apePaterno = apePaterno;
 	}
 
 	public String getApeMaterno() {
 		return apeMaterno;
 	}
 
-	public void setApeMaterno(String ape_materno) {
-		this.apeMaterno = ape_materno;
+	public void setApeMaterno(String apeMaterno) {
+		this.apeMaterno = apeMaterno;
 	}
 
 	public String getNombre() {
@@ -129,50 +187,35 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	public Rol getIdrol() {
-		return idrol;
+	public String getPassword() {
+		return password;
 	}
 
-
-
-	public void setIdrol(Rol idrol) {
-		this.idrol = idrol;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public Date getFecha_inicio() {
-		return new java.sql.Date(this.fechaInicio.getTime());
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fechaInicio = fecha_inicio;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-	public List<Horarios> getHorariosList() {
-		return horariosList;
+	public List<Legajo> getLegajoList() {
+		return legajoList;
 	}
 
-	public void setHorariosList(List<Horarios> horariosList) {
-		this.horariosList = horariosList;
+	public void setLegajoList(List<Legajo> legajoList) {
+		this.legajoList = legajoList;
 	}
 
-	public Usuario(Long idusuario, String dni, String ape_paterno, String ape_materno, String nombre, String email,
-				   String telefono, Rol idrol, Date fecha_inicio, List<Horarios> horariosList, String user) {
-		super();
-		this.idusuario = idusuario;
-		this.dni = dni;
-		this.apePaterno = ape_paterno;
-		this.apeMaterno = ape_materno;
-		this.nombre = nombre;
-		this.email = email;
-		this.telefono = telefono;
-		this.idrol = idrol;
-		this.fechaInicio = fecha_inicio;
-		this.horariosList = horariosList;
-		this.user = user;
+	public List<UsuarioDeclaracionesJuradas> getUsuariodj() {
+		return usuariodj;
 	}
 
-	public Usuario() {
-		super();
+	public void setUsuariodj(List<UsuarioDeclaracionesJuradas> usuariodj) {
+		this.usuariodj = usuariodj;
 	}
-
 }

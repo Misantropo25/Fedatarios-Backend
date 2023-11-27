@@ -18,6 +18,18 @@
 	</properties>
 	<dependencies>
 		<!-- Dependencias agregadas durante el desarrollo-->
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.14</version> <!-- Usa la última versión de HttpClient 4.x -->
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.apache.httpcomponents.client5</groupId>-->
+<!--			<artifactId>httpclient5</artifactId>-->
+<!--			<version>5.2.1</version>-->
+<!--		</dependency>-->
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -29,6 +41,18 @@
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
+		</dependency>
+
+		<!-- Error de dependencias -->
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>2.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.3</version>
 		</dependency>
 
 		<!-- Dependencia SAML -->
@@ -56,7 +80,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

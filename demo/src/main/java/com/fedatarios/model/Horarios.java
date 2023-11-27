@@ -1,15 +1,12 @@
 package com.fedatarios.model;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="horarios")
@@ -17,58 +14,67 @@ public class Horarios {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Column(name = "idHorario")
+    private Long idHorario;
 	
-    private Date fecha;
-    
-    private Time hora;
-    
-    @ManyToOne
-    @JoinColumn(name = "idusuario")
-    private Usuario usuario;
+    private LocalDateTime fecha_hora;
 
-	public Long getId() {
-		return id;
-	}
+	@OneToMany(mappedBy = "horario")
+	@JsonManagedReference
+	private List<ReservaHorario> reservas;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	public Time getHora() {
-		return hora;
-	}
-
-	public void setHora(Time hora) {
-		this.hora = hora;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Horarios(Long id, Date fecha, Time hora, Usuario usuario) {
-		super();
-		this.id = id;
-		this.fecha = fecha;
-		this.hora = hora;
-		this.usuario = usuario;
-	}
+	// constructores
 
 	public Horarios() {
-		super();
+	}
+
+	public Horarios(Long idHorario, LocalDateTime fecha_hora, List<ReservaHorario> reservas) {
+		this.idHorario = idHorario;
+		this.fecha_hora = fecha_hora;
+		this.reservas = reservas;
+	}
+
+	//getters y setters
+
+	public Long getIdHorario() {
+		return idHorario;
+	}
+
+	public void setIdHorario(Long idHorario) {
+		this.idHorario = idHorario;
+	}
+
+	public List<ReservaHorario> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(List<ReservaHorario> reservas) {
+		this.reservas = reservas;
+	}
+
+	public Long getId() {
+		return idHorario;
+	}
+
+	public void setId(Long idHorario) {
+		this.idHorario = idHorario;
+	}
+
+	public LocalDateTime getFecha_hora() {
+		return fecha_hora;
+	}
+
+	public void setFecha_hora(LocalDateTime fecha_hora) {
+		this.fecha_hora = fecha_hora;
+	}
+
+	public LocalDateTime getFechaHora() {
+		return fecha_hora;
+	}
+
+	public void setFechaHora(LocalDateTime fecha_hora) {
+		this.fecha_hora = fecha_hora;
 	}
 
 }
