@@ -1,11 +1,10 @@
 package com.fedatarios.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+
+import java.util.List;
 
 @Entity
 @Table(name="tipo_documentos")
@@ -15,11 +14,13 @@ public class TipoDocumento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idtipo_documento;
-	
+
+	@Column(name = "descripcion", length = 100)
 	private String descripcion;
-	
-	@OneToOne(mappedBy = "tipo_documento")
-	private Documentos_Escaneados doc_escaneados;
+
+	@OneToMany(mappedBy = "tipo_documento")
+	@JsonManagedReference
+	private List<Documentos_Escaneados> documentosEscaneados;
 
 	public Long getIddocumento() {
 		return idtipo_documento;
@@ -37,20 +38,41 @@ public class TipoDocumento {
 		this.descripcion = descripcion;
 	}
 
-	public Documentos_Escaneados getDocumento_escaneado() {
-		return doc_escaneados;
+	public Long getIdtipo_documento() {
+		return idtipo_documento;
 	}
 
-	public void setDocumento_escaneado(Documentos_Escaneados documento_escaneado) {
-		this.doc_escaneados = documento_escaneado;
+	public void setIdtipo_documento(Long idtipo_documento) {
+		this.idtipo_documento = idtipo_documento;
 	}
 
-	public TipoDocumento(Long iddocumento, String descripcion, Documentos_Escaneados documento_escaneado) {
-		super();
-		this.idtipo_documento = iddocumento;
+	public List<Documentos_Escaneados> getDocumentosEscaneados() {
+		return documentosEscaneados;
+	}
+
+	public void setDocumentosEscaneados(List<Documentos_Escaneados> documentosEscaneados) {
+		this.documentosEscaneados = documentosEscaneados;
+	}
+//	public Documentos_Escaneados getDocumento_escaneado() {
+//		return doc_escaneados;
+//	}
+
+//	public void setDocumento_escaneado(Documentos_Escaneados documento_escaneado) {
+//		this.doc_escaneados = documento_escaneado;
+//	}
+
+	public TipoDocumento(Long idtipo_documento, String descripcion, List<Documentos_Escaneados> documentosEscaneados) {
+		this.idtipo_documento = idtipo_documento;
 		this.descripcion = descripcion;
-		this.doc_escaneados = documento_escaneado;
+		this.documentosEscaneados = documentosEscaneados;
 	}
+
+//	public TipoDocumento(Long iddocumento, String descripcion) {
+//		super();
+//		this.idtipo_documento = iddocumento;
+//		this.descripcion = descripcion;
+////		this.doc_escaneados = documento_escaneado;
+//	}
 
 	public TipoDocumento() {
 		super();

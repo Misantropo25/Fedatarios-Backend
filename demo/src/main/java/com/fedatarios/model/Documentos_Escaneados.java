@@ -2,15 +2,8 @@ package com.fedatarios.model;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "documentos_escaneados")
@@ -19,17 +12,62 @@ public class Documentos_Escaneados {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long iddoc_escaneado;
-	
-	@OneToOne
+
+	@ManyToOne
 	@JoinColumn(name = "idtipo_documento")
+	@JsonBackReference
 	private TipoDocumento tipo_documento;
+
+	@Column(name = "ruta_archivo")
+	private String rutaArchivo; // o nombreArchivo
+
+	// Consideraciones en caso de que el docuemento este firmado
+	@Column(name = "ruta_archivo_firmado")
+	private String rutaArchivoFirmado;
+
+	@Column(name = "firmado")
+	private Boolean firmado;
 	
 	@ManyToOne
 	@JoinColumn(name = "idlegajo")
 	Legajo legajo;
-	
-	@OneToMany(mappedBy = "docEscaneados")
-	List<Observaciones> listaObservaciones;
+
+	@OneToMany(mappedBy = "documentoEscaneado")
+	private List<DocumentoObservacion> documentoObservaciones;
+
+
+	// constructores
+
+	public Documentos_Escaneados(Long iddoc_escaneado, TipoDocumento tipo_documento, String rutaArchivo, String rutaArchivoFirmado, Boolean firmado, Legajo legajo, List<DocumentoObservacion> documentoObservaciones) {
+		this.iddoc_escaneado = iddoc_escaneado;
+		this.tipo_documento = tipo_documento;
+		this.rutaArchivo = rutaArchivo;
+		this.rutaArchivoFirmado = rutaArchivoFirmado;
+		this.firmado = firmado;
+		this.legajo = legajo;
+		this.documentoObservaciones = documentoObservaciones;
+	}
+
+	public Documentos_Escaneados() {
+	}
+
+	//getters y setters
+
+	public String getRutaArchivoFirmado() {
+		return rutaArchivoFirmado;
+	}
+
+	public void setRutaArchivoFirmado(String rutaArchivoFirmado) {
+		this.rutaArchivoFirmado = rutaArchivoFirmado;
+	}
+
+	public Boolean getFirmado() {
+		return firmado;
+	}
+
+	public void setFirmado(Boolean firmado) {
+		this.firmado = firmado;
+	}
 
 	public Long getIddoc_escaneado() {
 		return iddoc_escaneado;
@@ -55,25 +93,27 @@ public class Documentos_Escaneados {
 		this.legajo = legajo;
 	}
 
-	public List<Observaciones> getListaObservaciones() {
-		return listaObservaciones;
+	public void setDescripcion(String filename){
+		this.tipo_documento.setDescripcion(filename);
 	}
 
-	public void setListaObservaciones(List<Observaciones> listaObservaciones) {
-		this.listaObservaciones = listaObservaciones;
+	public void getDescripcion(){
+		this.tipo_documento.getDescripcion();
 	}
 
-	public Documentos_Escaneados(Long iddoc_escaneado, TipoDocumento tipo_documento, Legajo legajo,
-			List<Observaciones> listaObservaciones) {
-		super();
-		this.iddoc_escaneado = iddoc_escaneado;
-		this.tipo_documento = tipo_documento;
-		this.legajo = legajo;
-		this.listaObservaciones = listaObservaciones;
+	public List<DocumentoObservacion> getDocumentoObservaciones() {
+		return documentoObservaciones;
 	}
 
-	public Documentos_Escaneados() {
-		super();
+	public void setDocumentoObservaciones(List<DocumentoObservacion> documentoObservaciones) {
+		this.documentoObservaciones = documentoObservaciones;
 	}
 
+	public String getRutaArchivo() {
+		return rutaArchivo;
+	}
+
+	public void setRutaArchivo(String rutaArchivo) {
+		this.rutaArchivo = rutaArchivo;
+	}
 }

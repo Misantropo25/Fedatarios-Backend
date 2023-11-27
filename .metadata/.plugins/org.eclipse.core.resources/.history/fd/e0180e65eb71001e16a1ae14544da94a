@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fedatarios.model.Rol;
-import com.fedatarios.service.RolServicio;
+import com.fedatarios.service.RolService;
 
 @RestController
 public class rolControlador {

@@ -1,10 +1,10 @@
 package com.fedatarios.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Rol {
@@ -15,8 +15,30 @@ public class Rol {
 
 	 private String descripcion_rol;
 
-	 @OneToOne(mappedBy = "idrol")
-	 private Usuario usuario;
+	@OneToMany(mappedBy = "rol")
+	@JsonManagedReference
+	private List<Usuario> usuarios;
+
+	 //constructores
+
+	public Rol(Long idrol, String descripcion_rol, List<Usuario> usuarios) {
+		this.idrol = idrol;
+		this.descripcion_rol = descripcion_rol;
+		this.usuarios = usuarios;
+	}
+
+	public Rol() {
+	}
+
+	//getters y setters
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	public Long getIdrol() {
 		return idrol;
@@ -34,18 +56,6 @@ public class Rol {
 		this.descripcion_rol = descripcion_rol;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
-	public Rol() {
-		super();
-	}
-	
-	 
-	 
 }

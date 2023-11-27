@@ -3,9 +3,9 @@ package com.fedatarios.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.fedatarios.model.Observaciones;
+import com.fedatarios.model.Documentos_Escaneados;
 
 @Repository
-public interface ObservacionesRepositorio extends JpaRepository<Observaciones, Long> {
+public interface DocumentosEscaneadosRepository extends JpaRepository<Documentos_Escaneados, Long>{
 
 }
